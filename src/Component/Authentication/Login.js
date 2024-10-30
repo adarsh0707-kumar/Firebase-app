@@ -106,7 +106,8 @@ const Login = () => {
                 <br />
                 <br />
                 <h2>Login With OTP</h2>
-                <input onChange={(e)=>{setPhone(e.target.value)}} placeholder='Phone Number' type='number' />
+                <input onChange={(e) => { setPhone(e.target.value) }} placeholder='Phone Number' type='number' />
+                <div id = 'abc'></div>
                 <button type='button' onClick={sendOTP}>Send OTP</button> 
             </form>
 
