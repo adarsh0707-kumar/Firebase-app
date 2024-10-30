@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider,FacebookAuthProvider, TwitterAuthProvider,GithubAuthProvider, signInWithPhoneNumber } from 'firebase/auth';
 import { app } from '../../Firebase';
 import { useNavigate } from 'react-router-dom';
-import { RecaptchaVerifier } from 'firebase/auth/web-extension';
-
+import { RecaptchaVerifier } from 'firebase/auth'
 const Login = () => {
 
 
