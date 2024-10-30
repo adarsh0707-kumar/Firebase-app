@@ -12,7 +12,7 @@ const SideNavBar = () => {
     const LogOut = () => {
         const auth = getAuth(app);
         signOut(auth)
-            .than(res => {
+            .then(res => {
                 navigate('/login');
             })
             .catch(err => {
