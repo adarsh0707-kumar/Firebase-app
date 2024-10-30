@@ -11,8 +11,9 @@ const Login = () => {
     const [phone, setPhone] = useState(null);
     const [isOTP, setIsOTP] = useState(false);
     const [code, setCode] = useState('');
+    const [confirmationResult, setConfirmationResult] = useState(null);
     const navigate = useNavigate();
-    let confirmationResult;
+    
     
     
     const submitHandler = (event) => {
@@ -85,9 +86,8 @@ const Login = () => {
         signInWithPhoneNumber(auth, phone, appVerifier)
             .then(res => {
                 console.log(res);
-                confirmationResult = res;
+                setConfirmationResult(res);
                 console.log('OTP send');
-                // navigate('/dashboard');
                 setIsOTP(true);
             })
             .catch(err => {
@@ -96,14 +96,18 @@ const Login = () => {
     }
 
     const confirmOTP = () => {
-        confirmationResult.confirm(code)
-            .then(res => {
-                console.log(res);
-                navigate('/dashboard')
-            })
-            .catch(err => {
-                console.error(err);
-            });
+        if (confirmationResult) {
+            confirmationResult.confirm(code)
+                .then((res) => {
+                    console.log(res);
+                    navigate('/dashboard');
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        } else {
+            console.error('No confirmation result found');
+        }
     }
 
 
