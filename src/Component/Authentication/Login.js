@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getAuth, signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider,FacebookAuthProvider, TwitterAuthProvider } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider,FacebookAuthProvider, TwitterAuthProvider,GithubAuthProvider } from 'firebase/auth';
 import { app } from '../../Firebase';
 import { useNavigate } from 'react-router-dom';
 
@@ -63,6 +63,18 @@ const Login = () => {
                 console.log(err);
             })
     }
+    const loginWithGitHub = () => {
+        const auth = getAuth(app);
+        const provider = new GithubAuthProvider()
+        signInWithPopup(auth, provider)
+            .then(result => {
+                console.log(result);
+                navigate('/dashboard')
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
 
     return (
@@ -75,6 +87,7 @@ const Login = () => {
                 <button type='button' onClick={loginWithGoogle}>Login with Google</button> 
                 <button type='button' onClick={loginWithFacebook}>Login with Facebook</button>
                 <button type='button' onClick={loginWithX}>Login with X</button> 
+                <button type='button' onClick={loginWithGitHub}>Login with GitHub</button> 
             </form>
 
             
