@@ -78,7 +78,7 @@ const Login = () => {
     }
     const sendOTP = () => {
         const auth = getAuth(app);
-        const appVerifier = new RecaptchaVerifier(auth,'abc',{});
+        const appVerifier = new RecaptchaVerifier(auth,'abc',{'size': 'invisible'});
         signInWithPhoneNumber(auth, phone, appVerifier)
             .then(res => {
                 console.log(res);
