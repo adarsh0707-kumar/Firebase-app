@@ -8,6 +8,7 @@ const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [phone, setPhone] = useState(null);
     const navigate = useNavigate();
     
     
@@ -75,6 +76,9 @@ const Login = () => {
                 console.log(err);
             })
     }
+    const sendOTP = () => {
+        console.log()
+    }
 
 
     return (
@@ -88,6 +92,11 @@ const Login = () => {
                 <button type='button' onClick={loginWithFacebook}>Login with Facebook</button>
                 <button type='button' onClick={loginWithX}>Login with X</button> 
                 <button type='button' onClick={loginWithGitHub}>Login with GitHub</button> 
+                <br />
+                <br />
+                <h2>Login With OTP</h2>
+                <input onChange={(e)=>{setPhone(e.target.value)}} placeholder='Phone Number' type='number' />
+                <button type='button' onClick={sendOTP}>Send OTP</button> 
             </form>
 
             
