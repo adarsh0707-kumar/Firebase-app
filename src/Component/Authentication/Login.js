@@ -118,7 +118,7 @@ const Login = () => {
                 <button type='button' onClick={loginWithGitHub}>Login with GitHub</button> 
                 <br />
                 <br />
-                {!isOTP?
+                {isOTP?
                     <div>
                     <h2>Login With OTP</h2>
                     <input onChange={(e) => { setPhone(e.target.value) }} placeholder='Phone Number' />
