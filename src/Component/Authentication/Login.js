@@ -87,7 +87,7 @@ const Login = () => {
                 console.log(res);
                 confirmationResult = res;
                 console.log('OTP send');
-                navigate('/dashboard');
+                // navigate('/dashboard');
                 setIsOTP(true);
             })
             .catch(err => {
