@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider,FacebookAuthProvider, TwitterAuthProvider,GithubAuthProvider, signInWithPhoneNumber } from 'firebase/auth';
 import { app } from '../../Firebase';
 import { useNavigate } from 'react-router-dom';
+import { RecaptchaVerifier } from 'firebase/auth/web-extension';
 
 const Login = () => {
 
@@ -78,8 +79,8 @@ const Login = () => {
     }
     const sendOTP = () => {
         const auth = getAuth(app);
-        const appVerifier = window.recaptchaVerifier;
-        signInWithPhoneNumber(phone, auth, appVerifier)
+        const appVerifier = new RecaptchaVerifier(auth,'abc',{});
+        signInWithPhoneNumber(auth, phone, appVerifier)
             .then(res => {
                 console.log(res);
                 console.log('OTP send');
