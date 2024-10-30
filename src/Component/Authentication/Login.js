@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import { getAuth, signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider,FacebookAuthProvider } from 'firebase/auth';
 import { app } from '../../Firebase';
 import { useNavigate } from 'react-router-dom';
-import { auth } from 'firebase-admin';
-
-
 
 const Login = () => {
 
@@ -34,12 +31,25 @@ const Login = () => {
         signInWithPopup(auth, provider)
             .then(result => {
                 console.log(result);
+                navigate('/dashboard')
             })
             .catch(err => {
-            console.log(err)
+                console.log(err);
         })
     }
 
+    const loginWithFacebook = () => {
+        const auth = getAuth(app);
+        const provider = new FacebookAuthProvider()
+        signInWithPopup(auth, provider)
+            .then(result => {
+                console.log(result);
+                navigate('/dashboard')
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     return (
         <>
@@ -48,8 +58,11 @@ const Login = () => {
                 <input onChange={(e) => { setPassword(e.target.value) }} type='password' placeholder='Password' />
                 <button type='submit'>LogIn</button>
                 <br />
-                <button onClick={loginWithGoogle}>Login with Google</button>
+                <button type='button' onClick={loginWithGoogle}>Login with Google</button> 
+                <button type='button' onClick={loginWithFacebook}>Login with Facebook</button> 
             </form>
+
+            
         </>
     )
 }
