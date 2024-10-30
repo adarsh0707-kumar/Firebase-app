@@ -33,6 +33,8 @@ body{
     background: yellow;
     margin-bottom: 1rem;
     margin-left: 5rem;
+    border: none;
+    cursor: pointer;
 }
 
 .dashboard__mainContent{
