@@ -12,6 +12,7 @@ const Login = () => {
     const [isOTP, setIsOTP] = useState(false);
     const [code, setCode] = useState('');
     const navigate = useNavigate();
+    let confirmationResult;
     
     
     const submitHandler = (event) => {
@@ -84,7 +85,7 @@ const Login = () => {
         signInWithPhoneNumber(auth, phone, appVerifier)
             .then(res => {
                 console.log(res);
-                window.confirmationResult = res;
+                confirmationResult = res;
                 console.log('OTP send');
                 navigate('/dashboard');
                 setIsOTP(true);
@@ -95,9 +96,10 @@ const Login = () => {
     }
 
     const confirmOTP = () => {
-        window.confirmationResult.confirm(code)
+        confirmationResult.confirm(code)
             .then(res => {
-                console.log(res)
+                console.log(res);
+                navigate('/dashboard')
             })
             .catch(err => {
                 console.error(err);
@@ -118,7 +120,7 @@ const Login = () => {
                 <button type='button' onClick={loginWithGitHub}>Login with GitHub</button> 
                 <br />
                 <br />
-                {isOTP?
+                {!isOTP?
                     <div>
                     <h2>Login With OTP</h2>
                     <input onChange={(e) => { setPhone(e.target.value) }} placeholder='Phone Number' />
@@ -126,11 +128,11 @@ const Login = () => {
                     <button type='button' onClick={sendOTP}>Send OTP</button> 
                     </div>
                     :
-                    <di>
+                    <div >
                         <h2>Confirm OTP</h2>
                         <input type='text' onChange={(e) =>{setCode(e.target.value)}}/>
                         <button type='button' onClick={confirmOTP}>Submit OTP</button>
-                    </di>
+                    </div>
                 }
             </form>
 
