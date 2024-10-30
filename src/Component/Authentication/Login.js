@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getAuth, signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider,FacebookAuthProvider, TwitterAuthProvider,GithubAuthProvider } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider,FacebookAuthProvider, TwitterAuthProvider,GithubAuthProvider, signInWithPhoneNumber } from 'firebase/auth';
 import { app } from '../../Firebase';
 import { useNavigate } from 'react-router-dom';
 
@@ -77,7 +77,17 @@ const Login = () => {
             })
     }
     const sendOTP = () => {
-        console.log()
+        const auth = getAuth(app);
+        const appVerifier = window.recaptchaVerifier;
+        signInWithPhoneNumber(phone, auth, appVerifier)
+            .then(res => {
+                console.log(res);
+                console.log('OTP send');
+                navigate('/dashboard');
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 
 
